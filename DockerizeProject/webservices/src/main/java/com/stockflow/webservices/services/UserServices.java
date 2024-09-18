@@ -9,6 +9,6 @@ public interface UserServices {
     Users createUsers(Users newUsers);
     List<Users> getListOfUsers();
     Optional<Users> findUserById(Long userId);
-    Users updateUserDetails(Users updatedUssers, Long id);
-    void deactivateUser(Long id);
+    Users updateUserDetails(Users updatedUsers, Long userId);
+    void deactivateUser(Long userId);
 }
