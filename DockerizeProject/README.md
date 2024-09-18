@@ -10,11 +10,17 @@
 
 #### CLI
 ```
-docker build -t <IMAGE NAME> . // build project
+# build project
 
-docker ps -a | docker images // show available docker container or image
+docker build -t <IMAGE NAME> .
+
+# show available docker container or image
+
+docker ps -a | docker images
 
 or
 
-docker-compose up -d // build configuration in your docker compose in detached mode 
+# build configuration in your docker compose in detached mode 
+
+docker-compose up -d
 ```
