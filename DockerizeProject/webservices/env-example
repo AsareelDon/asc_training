@@ -1,0 +1,25 @@
+### Postgres Image ### status -> used in docker-compose
+POSTGRES_DB=your_database
+POSTGRES_USER=sample_user
+POSTGRES_PASSWORD=sample_password
+PSQL_PORT=5432
+
+### local PostgresSQL ### 
+LOCAL_PSQL_HOST=localhost
+LOCAL_PSQL_DATABASE=your_local_database
+LOCAL_PSQL_USERNAME=sample_user_local
+LOCAL_PSQL_PASSWORD=sample_password_local
+LOCAL_PSQL_PORT=8000
+
+### Image PostgresSQL Config ###
+DATASOURCE_DATABASE=your_database
+SPRING_DATASOURCE_USERNAME=sample_user
+SPRING_DATASOURCE_PASSWORD=sample_password
+SPRING_DATASOURCE_URL=jdbc:postgresql://postgres_service_name:5432/your_database
+
+### JWT Secret Keys ###
+JWT_SECRET_KEY=
+JWT_REFRESH_KEY=
+
+JWT_ACCESS_TOKEN_EXP=
+JWT_REFRESH_TOKEN_EXP=
