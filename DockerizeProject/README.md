@@ -14,13 +14,13 @@
 
 docker build -t <IMAGE NAME> .
 
-# (show available docker container or image)
+# show available docker container or image
 
 docker ps -a | docker images
 
 or
 
-# (build configuration in your docker compose in detached mode)
+# build configuration in your docker compose in detached mode
 
 docker-compose up -d
 ```
