@@ -17,9 +17,8 @@ A lightweight and efficient backend service built with Spring Boot, offering sea
 
 ## Tech Stacks
 1. Spring Boot
-2. PostgresSQL
-3. Docker
-4. Git
+
+![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white) ![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white) ![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white) ![Git](https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white) ![Postman](https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=postman&logoColor=white)
 
 
 ## Road Map
@@ -28,15 +27,16 @@ A lightweight and efficient backend service built with Spring Boot, offering sea
         - [x] Setup Database Connection
         - [x] Entity Relationship
         - [x] Create Basic API endpoints (CRUD)
+        - [x] Implement DTO pattern (Request & Response)
     - [x] Docker
         - [x] Dockerfile
         - [x] docker-compose
-    - [ ] Authentication & Authorization
+    - [ ] Spring Security
         - [ ] Encrypton (Bcrypt)
-        - [ ] Spring Security
-        - [ ] JWT
-            - [ ] Access Token
-            - [ ] Refresh Token
+        - [ ] Authentication & Authorization 
+            - [ ] JWT
+                - [ ] Access Token
+                - [ ] Refresh Token
 
 
 
@@ -56,3 +56,5 @@ or
 
 docker-compose up -d
 ```
+
+<!-- Proudly created with GPRM ( https://gprm.itsvg.in ) -->
