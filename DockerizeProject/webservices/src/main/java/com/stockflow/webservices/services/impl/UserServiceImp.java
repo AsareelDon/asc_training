@@ -6,15 +6,15 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import com.stockflow.webservices.models.UserDetails;
-import com.stockflow.webservices.repository.UserDetailsRepository;
-import com.stockflow.webservices.services.UserDetailsServices;
+import com.stockflow.webservices.repository.UserRepository;
+import com.stockflow.webservices.services.UserServices;
 
 @Service
-public class UserDetailsServiceImp implements UserDetailsServices {
+public class UserServiceImp implements UserServices {
 
-    private final UserDetailsRepository userRepository;
+    private final UserRepository userRepository;
     
-    public UserDetailsServiceImp(UserDetailsRepository userRepository) {
+    public UserServiceImp(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 

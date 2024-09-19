@@ -5,7 +5,7 @@ import java.util.Optional;
 
 import com.stockflow.webservices.models.UserDetails;
 
-public interface UserDetailsServices {
+public interface UserServices {
     UserDetails createUsers(UserDetails newUsers);
     List<UserDetails> getListOfUsers();
     Optional<UserDetails> findUserById(Long userId);

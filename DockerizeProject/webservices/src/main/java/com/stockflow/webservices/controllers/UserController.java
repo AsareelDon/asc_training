@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.stockflow.webservices.models.UserDetails;
-import com.stockflow.webservices.services.UserDetailsServices;
+import com.stockflow.webservices.services.UserServices;
 
 import java.util.List;
 import java.util.Optional;
@@ -20,11 +20,11 @@ import org.springframework.web.bind.annotation.PutMapping;
 
 @RestController
 @RequestMapping("/api/v1")
-public class UserDetailsController {
+public class UserController {
 
-    private final UserDetailsServices userServices;
+    private final UserServices userServices;
 
-    public UserDetailsController(UserDetailsServices userServices) {
+    public UserController(UserServices userServices) {
         this.userServices = userServices;
     }
 
