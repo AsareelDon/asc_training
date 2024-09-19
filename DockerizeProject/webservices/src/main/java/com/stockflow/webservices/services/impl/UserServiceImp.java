@@ -7,11 +7,10 @@ import org.springframework.stereotype.Service;
 
 import com.stockflow.webservices.dto.UserAccountRequestDTO;
 import com.stockflow.webservices.dto.UserAccountResponseDTO;
-import com.stockflow.webservices.models.Accounts;
+import com.stockflow.webservices.dto.mapper.UserMapper;
 import com.stockflow.webservices.models.UserDetails;
 import com.stockflow.webservices.repository.UserRepository;
 import com.stockflow.webservices.services.UserServices;
-import java.time.LocalDateTime;
 
 @Service
 public class UserServiceImp implements UserServices {
@@ -24,32 +23,12 @@ public class UserServiceImp implements UserServices {
 
     @Override
     public UserAccountResponseDTO createUsers(UserAccountRequestDTO userAccountDTO) {
-        UserDetails user = new UserDetails();
-        user.setFristName(userAccountDTO.getFirstname());
-        user.setMiddleName(userAccountDTO.getMiddlename());
-        user.setLastName(userAccountDTO.getLastname());
-        user.setCreatedAt(LocalDateTime.now());
-        user.setUpdatedAt(LocalDateTime.now());
-
-        Accounts userAccount = new Accounts();
-        userAccount.setUser(user);
-        userAccount.setUserName(userAccountDTO.getUserEmail());
-        userAccount.setUserPassword(userAccountDTO.getUserPassword());
-        userAccount.setCreatedAt(LocalDateTime.now());
-        userAccount.setUpdatedAt(LocalDateTime.now());
-
-        user.setAccounts(userAccount);
-
+        // Aggregating Data from Multiple Sources UserDetails and Accounts
+        UserDetails user = UserMapper.userDetailsMapper(userAccountDTO);
         user = userRepository.save(user);
-
         userAccountDTO.setUserId(user.getUserId());
-
-        UserAccountResponseDTO responseDTO = new UserAccountResponseDTO();
-        responseDTO.setUserId(user.getUserId());
-        responseDTO.setFirstname(user.getFristName());
-        responseDTO.setMiddlename(user.getMiddleName());
-        responseDTO.setLastname(user.getLastName());
-        responseDTO.setUserEmail(userAccount.getUserName());
+        // Mapped resonse data from responseDTO
+        UserAccountResponseDTO responseDTO = UserMapper.userDetailsResponseMapper(user);
 
         return responseDTO;
     }
