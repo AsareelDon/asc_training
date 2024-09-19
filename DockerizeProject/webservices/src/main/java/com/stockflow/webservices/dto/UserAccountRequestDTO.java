@@ -3,8 +3,8 @@ package com.stockflow.webservices.dto;
 import lombok.Data;
 
 @Data
-public class UserAccountDTO {
-    private Long id;
+public class UserAccountRequestDTO {
+    private Long userId;
     private String firstname;
     private String middlename;
     private String lastname;
