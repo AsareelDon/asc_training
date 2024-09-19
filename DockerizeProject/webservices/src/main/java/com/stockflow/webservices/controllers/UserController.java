@@ -5,12 +5,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.stockflow.webservices.dto.UserAccountRequestDTO;
+import com.stockflow.webservices.dto.UserAccountResponseDTO;
 import com.stockflow.webservices.models.UserDetails;
 import com.stockflow.webservices.services.UserServices;
 
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,8 +33,10 @@ public class UserController {
     }
 
     @PostMapping("createUsers")
-    public UserDetails createNewUser(@RequestBody UserDetails newUsers) {
-        return userServices.createUsers(newUsers);
+    public ResponseEntity<UserAccountResponseDTO> createNewUser(@RequestBody UserAccountRequestDTO users) {
+        UserAccountResponseDTO createdUsers = userServices.createUsers(users);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdUsers);
     }
 
     @GetMapping("getAllUsers")
