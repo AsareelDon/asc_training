@@ -17,18 +17,21 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Entity
 @Table(name = "users")
-public class Users {
+public class UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id", nullable = false, unique = true)
     private Long userId;
 
-    @Column(name = "username", nullable = false, unique = true)
-    private String userName;
+    @Column(name = "firtname", nullable = false)
+    private String fristName;
 
-    @Column(name = "password", nullable = false)
-    private String userPassword;
+    @Column(name = "middlename", nullable = false)
+    private String middleName;
+
+    @Column(name = "lastname", nullable = false)
+    private String lastName;
 
     @Column(name = "deletedAt", nullable = true)
     private LocalDateTime deletedAt;

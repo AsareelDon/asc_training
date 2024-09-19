@@ -5,8 +5,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.stockflow.webservices.models.Users;
-import com.stockflow.webservices.services.UserServices;
+import com.stockflow.webservices.models.UserDetails;
+import com.stockflow.webservices.services.UserDetailsServices;
 
 import java.util.List;
 import java.util.Optional;
@@ -20,31 +20,31 @@ import org.springframework.web.bind.annotation.PutMapping;
 
 @RestController
 @RequestMapping("/api/v1")
-public class UserController {
+public class UserDetailsController {
 
-    private final UserServices userServices;
+    private final UserDetailsServices userServices;
 
-    public UserController(UserServices userServices) {
+    public UserDetailsController(UserDetailsServices userServices) {
         this.userServices = userServices;
     }
 
     @PostMapping("createUsers")
-    public Users createNewUser(@RequestBody Users newUsers) {
+    public UserDetails createNewUser(@RequestBody UserDetails newUsers) {
         return userServices.createUsers(newUsers);
     }
 
     @GetMapping("getAllUsers")
-    public List<Users> getAllUsers() {
+    public List<UserDetails> getAllUsers() {
         return userServices.getListOfUsers();
     }
     
     @GetMapping("getUser/{userId}")
-    public Optional<Users> getUserById(@PathVariable("userId") Long userId) {
+    public Optional<UserDetails> getUserById(@PathVariable("userId") Long userId) {
         return userServices.findUserById(userId);
     }
 
     @PutMapping("updateUser/{userId}")
-    public Users updateUser(@PathVariable Long userId, @RequestBody Users updatedUser) {
+    public UserDetails updateUser(@PathVariable Long userId, @RequestBody UserDetails updatedUser) {
         return userServices.updateUserDetails(updatedUser, userId);
     }
 

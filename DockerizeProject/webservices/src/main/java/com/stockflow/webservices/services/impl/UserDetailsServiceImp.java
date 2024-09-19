@@ -5,21 +5,21 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
-import com.stockflow.webservices.models.Users;
-import com.stockflow.webservices.repository.UserRepository;
-import com.stockflow.webservices.services.UserServices;
+import com.stockflow.webservices.models.UserDetails;
+import com.stockflow.webservices.repository.UserDetailsRepository;
+import com.stockflow.webservices.services.UserDetailsServices;
 
 @Service
-public class UserServiceImp implements UserServices {
+public class UserDetailsServiceImp implements UserDetailsServices {
 
-    private final UserRepository userRepository;
+    private final UserDetailsRepository userRepository;
     
-    public UserServiceImp(UserRepository userRepository) {
+    public UserDetailsServiceImp(UserDetailsRepository userRepository) {
         this.userRepository = userRepository;
     }
 
     @Override
-    public Users createUsers(Users newUsers) {
+    public UserDetails createUsers(UserDetails newUsers) {
         try {
             return userRepository.save(newUsers);
         } catch (Exception e) {
@@ -28,7 +28,7 @@ public class UserServiceImp implements UserServices {
     }
 
     @Override
-    public List<Users> getListOfUsers() {
+    public List<UserDetails> getListOfUsers() {
         try {
             return userRepository.findAll();
         } catch (Exception e) {
@@ -37,7 +37,7 @@ public class UserServiceImp implements UserServices {
     }
 
     @Override
-    public Optional<Users> findUserById(Long userId) {
+    public Optional<UserDetails> findUserById(Long userId) {
         try {
             return userRepository.findById(userId);
         } catch (Exception e) {
@@ -46,7 +46,7 @@ public class UserServiceImp implements UserServices {
     }
 
     @Override
-    public Users updateUserDetails(Users updatedUsers, Long userId) {
+    public UserDetails updateUserDetails(UserDetails updatedUsers, Long userId) {
         try {
             updatedUsers.setUserId(userId);
             return userRepository.save(updatedUsers);
