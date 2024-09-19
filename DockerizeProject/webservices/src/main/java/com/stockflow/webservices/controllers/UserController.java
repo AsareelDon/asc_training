@@ -10,11 +10,16 @@ import com.stockflow.webservices.dto.UserAccountResponseDTO;
 import com.stockflow.webservices.models.UserDetails;
 import com.stockflow.webservices.services.UserServices;
 
+import jakarta.validation.Valid;
+
+import java.util.HashMap;
+import java.util.Map;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,10 +38,23 @@ public class UserController {
     }
 
     @PostMapping("createUsers")
-    public ResponseEntity<UserAccountResponseDTO> createNewUser(@RequestBody UserAccountRequestDTO users) {
-        UserAccountResponseDTO createdUsers = userServices.createUsers(users);
+    public ResponseEntity<?> createNewUser(@Valid @RequestBody UserAccountRequestDTO users, BindingResult bindResult) {
+        try {
+            if (bindResult.hasErrors()) {
+                Map<String, String> errors = new HashMap<>();
+                bindResult.getFieldErrors().forEach(error -> 
+                    errors.put(error.getField(), 
+                    error.getDefaultMessage())
+                );
+    
+                return ResponseEntity.badRequest().body(errors);
+            }
+            UserAccountResponseDTO createdUsers = userServices.createUsers(users);
+            return ResponseEntity.status(HttpStatus.CREATED).body(createdUsers);
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(createdUsers);
+        } catch (Exception error) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(error);
+        }
     }
 
     @GetMapping("getAllUsers")
