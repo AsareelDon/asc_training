@@ -16,19 +16,25 @@ import com.stockflow.webservices.services.UserServices;
 public class UserServiceImp implements UserServices {
 
     private final UserRepository userRepository;
+
+    private final UserMapper userMapper;
     
-    public UserServiceImp(UserRepository userRepository) {
+    public UserServiceImp(
+        UserRepository userRepository, 
+        UserMapper userMapper
+    ) {
         this.userRepository = userRepository;
+        this.userMapper = userMapper;
     }
 
     @Override
     public UserAccountResponseDTO createUsers(UserAccountRequestDTO userAccountDTO) {
         // Aggregating Data from Multiple Sources UserDetails and Accounts
-        UserDetails user = UserMapper.userDetailsMapper(userAccountDTO);
+        // Mapped resonse from responseDTO
+        UserDetails user = userMapper.userDetailsMapper(userAccountDTO);
         user = userRepository.save(user);
         userAccountDTO.setUserId(user.getUserId());
-        // Mapped resonse data from responseDTO
-        UserAccountResponseDTO responseDTO = UserMapper.userDetailsResponseMapper(user);
+        UserAccountResponseDTO responseDTO = userMapper.userDetailsResponseMapper(user);
 
         return responseDTO;
     }
