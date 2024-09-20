@@ -4,11 +4,21 @@ import com.stockflow.webservices.dto.UserAccountRequestDTO;
 import com.stockflow.webservices.dto.UserAccountResponseDTO;
 import com.stockflow.webservices.models.Accounts;
 import com.stockflow.webservices.models.UserDetails;
+import com.stockflow.webservices.services.PasswordServices;
+
 import java.time.LocalDateTime;
 
+import org.springframework.stereotype.Component;
+@Component
 public class UserMapper {
+    
+    private final PasswordServices passwordServices;
 
-    public static UserDetails userDetailsMapper(UserAccountRequestDTO  requestDto) {
+    public UserMapper(PasswordServices passwordServices) {
+        this.passwordServices = passwordServices;
+    }
+
+    public UserDetails userDetailsMapper(UserAccountRequestDTO  requestDto) {
         UserDetails user = new UserDetails();
         user.setFristName(requestDto.getFirstname());
         user.setMiddleName(requestDto.getMiddlename());
@@ -19,7 +29,7 @@ public class UserMapper {
         Accounts userAccount = new Accounts();
         userAccount.setUser(user);
         userAccount.setUserName(requestDto.getUserEmail());
-        userAccount.setUserPassword(requestDto.getUserPassword());
+        userAccount.setUserPassword(passwordServices.passwordEncryption(requestDto.getUserPassword()));
         userAccount.setCreatedAt(LocalDateTime.now());
         userAccount.setUpdatedAt(LocalDateTime.now());
 
@@ -28,7 +38,7 @@ public class UserMapper {
         return user;
     }
 
-    public static UserAccountResponseDTO userDetailsResponseMapper(UserDetails user) {
+    public UserAccountResponseDTO userDetailsResponseMapper(UserDetails user) {
         UserAccountResponseDTO responseDTO = new UserAccountResponseDTO();
         responseDTO.setUserId(user.getUserId());
         responseDTO.setFirstname(user.getFristName());
