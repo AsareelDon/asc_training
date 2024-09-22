@@ -20,7 +20,7 @@ public class UserMapper {
 
     public UserDetails userDetailsMapper(UserAccountRequestDTO  requestDto) {
         UserDetails user = new UserDetails();
-        user.setFristName(requestDto.getFirstname());
+        user.setFirstName(requestDto.getFirstname());
         user.setMiddleName(requestDto.getMiddlename());
         user.setLastName(requestDto.getLastname());
         user.setCreatedAt(LocalDateTime.now());
@@ -41,7 +41,7 @@ public class UserMapper {
     public UserAccountResponseDTO userDetailsResponseMapper(UserDetails user) {
         UserAccountResponseDTO responseDTO = new UserAccountResponseDTO();
         responseDTO.setUserId(user.getUserId());
-        responseDTO.setFirstname(user.getFristName());
+        responseDTO.setFirstname(user.getFirstName());
         responseDTO.setMiddlename(user.getMiddleName());
         responseDTO.setLastname(user.getLastName());
         responseDTO.setUserEmail(user.getAccounts().getUserName());
