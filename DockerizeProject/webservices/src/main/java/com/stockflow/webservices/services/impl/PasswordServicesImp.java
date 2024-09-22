@@ -13,15 +13,16 @@ import de.mkammerer.argon2.Argon2Factory;
 public class PasswordServicesImp implements PasswordServices {
 
     private PasswordConfig passwordConfig;
+    private Argon2 argon2;
 
     @Autowired
     public void PasswordServicesImpl(PasswordConfig passwordConfig) {
         this.passwordConfig = passwordConfig;
+        argon2 = getArgon2Instance();
     }
 
     @Override
     public String passwordEncryption(String userPassword) {
-        Argon2 argon2 = getArgon2Instance();
         try {
             return argon2.hash(
                 passwordConfig.getIterations(),
@@ -34,6 +35,18 @@ public class PasswordServicesImp implements PasswordServices {
             System.err.println("Error during password encryption: " + e.getMessage());
             throw new RuntimeException("Password encryption failed", e);
         }
+    }
+
+    @Override
+    public boolean validateUserPassword(String hash, String userPassword) {
+        boolean isValid = false;
+        try {
+            isValid = argon2.verify(hash, userPassword.toCharArray());
+        } catch (Exception e) {
+            // Log the exception
+            System.err.println("Error during password validation: " + e.getMessage());
+        }
+        return isValid;
     }
 
     /**
