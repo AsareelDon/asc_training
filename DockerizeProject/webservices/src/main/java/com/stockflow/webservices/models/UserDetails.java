@@ -26,8 +26,8 @@ public class UserDetails {
     @Column(name = "user_id", nullable = false, unique = true)
     private Long userId;
 
-    @Column(name = "firtname", nullable = false)
-    private String fristName;
+    @Column(name = "firstname", nullable = false)
+    private String firstName;
 
     @Column(name = "middlename", nullable = false)
     private String middleName;
