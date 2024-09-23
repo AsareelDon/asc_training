@@ -10,11 +10,11 @@ import java.time.LocalDateTime;
 
 import org.springframework.stereotype.Component;
 @Component
-public class UserMapper {
+public class CustomDTOsMapper {
     
     private final PasswordServices passwordServices;
 
-    public UserMapper(PasswordServices passwordServices) {
+    public CustomDTOsMapper(PasswordServices passwordServices) {
         this.passwordServices = passwordServices;
     }
 

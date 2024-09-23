@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.stockflow.webservices.dto.UserAccountRequestDTO;
 import com.stockflow.webservices.dto.UserAccountResponseDTO;
-import com.stockflow.webservices.dto.mapper.UserMapper;
+import com.stockflow.webservices.dto.mapper.CustomDTOsMapper;
 import com.stockflow.webservices.models.UserDetails;
 import com.stockflow.webservices.repository.UserRepository;
 import com.stockflow.webservices.services.UserServices;
@@ -17,9 +17,9 @@ public class UserServiceImp implements UserServices {
 
     private final UserRepository userRepository;
 
-    private final UserMapper userMapper;
+    private final CustomDTOsMapper userMapper;
     
-    public UserServiceImp(UserRepository userRepository, UserMapper userMapper) {
+    public UserServiceImp(UserRepository userRepository, CustomDTOsMapper userMapper) {
         this.userRepository = userRepository;
         this.userMapper = userMapper;
     }
