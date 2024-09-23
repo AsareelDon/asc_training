@@ -2,10 +2,10 @@ package com.stockflow.webservices.controllers;
 
 import org.springframework.web.bind.annotation.RestController;
 
-import com.stockflow.webservices.dto.AuthResponseDTO;
-import com.stockflow.webservices.dto.LoginCredentialsDTO;
-import com.stockflow.webservices.dto.UserAccountRequestDTO;
-import com.stockflow.webservices.dto.UserResponseDto;
+import com.stockflow.webservices.dto.AuthResponse;
+import com.stockflow.webservices.dto.LoginCredentials;
+import com.stockflow.webservices.dto.UserRequest;
+import com.stockflow.webservices.dto.UserResponse;
 import com.stockflow.webservices.services.AuthServices;
 import com.stockflow.webservices.services.UserServices;
 
@@ -33,7 +33,7 @@ public class AuthController {
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<?> createNewAccount(@Valid @RequestBody UserAccountRequestDTO user, BindingResult bindingResult) {
+    public ResponseEntity<?> createNewAccount(@Valid @RequestBody UserRequest user, BindingResult bindingResult) {
         try {
             if (bindingResult.hasErrors()) {
                 Map<String, String> errorMessage = new HashMap<>();
@@ -43,7 +43,7 @@ public class AuthController {
 
                 return ResponseEntity.badRequest().body(errorMessage);
             }
-            UserResponseDto registeredAccount = userServices.createUsers(user);
+            UserResponse registeredAccount = userServices.createUsers(user);
             return ResponseEntity.status(HttpStatus.CREATED).body(registeredAccount);
 
         } catch (Exception error) {
@@ -52,7 +52,7 @@ public class AuthController {
     }
     
     @PostMapping("/signin")
-    public ResponseEntity<?> loginCredentials(@Valid @RequestBody LoginCredentialsDTO credentials, BindingResult bindingResult) {
+    public ResponseEntity<?> loginCredentials(@Valid @RequestBody LoginCredentials credentials, BindingResult bindingResult) {
         try {
             if (bindingResult.hasErrors()) {
                 Map<String, String> errorMessage = new HashMap<>();
@@ -62,7 +62,7 @@ public class AuthController {
 
                 return ResponseEntity.badRequest().body(errorMessage);
             }
-            AuthResponseDTO user = authServices.authenticateUserCredentials(credentials);
+            AuthResponse user = authServices.authenticateUserCredentials(credentials);
             return ResponseEntity.status(HttpStatus.CREATED).body(user);
 
         } catch (Exception error) {

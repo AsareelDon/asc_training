@@ -2,8 +2,8 @@ package com.stockflow.webservices.services.impl;
 
 import org.springframework.stereotype.Service;
 
-import com.stockflow.webservices.dto.AuthResponseDTO;
-import com.stockflow.webservices.dto.LoginCredentialsDTO;
+import com.stockflow.webservices.dto.AuthResponse;
+import com.stockflow.webservices.dto.LoginCredentials;
 import com.stockflow.webservices.dto.mapper.CustomDTOsMapper;
 import com.stockflow.webservices.models.Accounts;
 import com.stockflow.webservices.repository.AccountRepository;
@@ -24,7 +24,7 @@ public class AuthServiceImpl implements AuthServices {
     }
 
     @Override
-    public AuthResponseDTO authenticateUserCredentials(LoginCredentialsDTO credentialsDTO) {
+    public AuthResponse authenticateUserCredentials(LoginCredentials credentialsDTO) {
         Accounts userAccount = accountRepository.findByUserName(credentialsDTO.getUserEmail());
         if (userAccount == null) {
             throw new RuntimeException("Username doesn't exist in our record");
@@ -33,7 +33,7 @@ public class AuthServiceImpl implements AuthServices {
         if (!isPasswordValid) {
             throw new RuntimeException("Invalid Password!");
         }
-        AuthResponseDTO responseDTO = responseMapper.authResponseMapper(userAccount);
+        AuthResponse responseDTO = responseMapper.authResponseMapper(userAccount);
         return responseDTO;
     }
 

@@ -1,8 +1,8 @@
 package com.stockflow.webservices.services;
 
-import com.stockflow.webservices.dto.AuthResponseDTO;
-import com.stockflow.webservices.dto.LoginCredentialsDTO;
+import com.stockflow.webservices.dto.AuthResponse;
+import com.stockflow.webservices.dto.LoginCredentials;
 
 public interface AuthServices {
-    AuthResponseDTO authenticateUserCredentials(LoginCredentialsDTO credentialsDTO);
+    AuthResponse authenticateUserCredentials(LoginCredentials credentialsDTO);
 }

@@ -5,8 +5,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.stockflow.webservices.dto.UserAccountRequestDTO;
-import com.stockflow.webservices.dto.UserResponseDto;
+import com.stockflow.webservices.dto.UserRequest;
+import com.stockflow.webservices.dto.UserResponse;
 import com.stockflow.webservices.models.UserDetails;
 import com.stockflow.webservices.services.UserServices;
 
@@ -38,7 +38,7 @@ public class UserController {
     }
 
     @PostMapping("createUsers")
-    public ResponseEntity<?> createNewUser(@Valid @RequestBody UserAccountRequestDTO users, BindingResult bindResult) {
+    public ResponseEntity<?> createNewUser(@Valid @RequestBody UserRequest users, BindingResult bindResult) {
         try {
             if (bindResult.hasErrors()) {
                 Map<String, String> errors = new HashMap<>();
@@ -49,7 +49,7 @@ public class UserController {
     
                 return ResponseEntity.badRequest().body(errors);
             }
-            UserResponseDto createdUsers = userServices.createUsers(users);
+            UserResponse createdUsers = userServices.createUsers(users);
             return ResponseEntity.status(HttpStatus.CREATED).body(createdUsers);
 
         } catch (Exception error) {

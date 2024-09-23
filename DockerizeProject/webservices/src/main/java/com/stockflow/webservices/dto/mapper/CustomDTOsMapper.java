@@ -1,8 +1,8 @@
 package com.stockflow.webservices.dto.mapper;
 
-import com.stockflow.webservices.dto.AuthResponseDTO;
-import com.stockflow.webservices.dto.UserAccountRequestDTO;
-import com.stockflow.webservices.dto.UserResponseDto;
+import com.stockflow.webservices.dto.AuthResponse;
+import com.stockflow.webservices.dto.UserRequest;
+import com.stockflow.webservices.dto.UserResponse;
 import com.stockflow.webservices.models.Accounts;
 import com.stockflow.webservices.models.UserDetails;
 import com.stockflow.webservices.services.PasswordServices;
@@ -19,7 +19,7 @@ public class CustomDTOsMapper {
         this.passwordServices = passwordServices;
     }
 
-    public UserDetails userDetailsMapper(UserAccountRequestDTO  requestDto) {
+    public UserDetails userDetailsMapper(UserRequest  requestDto) {
         UserDetails user = new UserDetails();
         user.setFirstName(requestDto.getFirstname());
         user.setMiddleName(requestDto.getMiddlename());
@@ -39,8 +39,8 @@ public class CustomDTOsMapper {
         return user;
     }
 
-    public UserResponseDto userDetailsResponseMapper(UserDetails user) {
-        UserResponseDto responseDTO = new UserResponseDto();
+    public UserResponse userDetailsResponseMapper(UserDetails user) {
+        UserResponse responseDTO = new UserResponse();
         responseDTO.setUserId(user.getUserId());
         responseDTO.setFirstname(user.getFirstName());
         responseDTO.setMiddlename(user.getMiddleName());
@@ -50,8 +50,8 @@ public class CustomDTOsMapper {
         return responseDTO;
     }
 
-    public AuthResponseDTO authResponseMapper(Accounts userAccounts) {
-        AuthResponseDTO responseDTO = new AuthResponseDTO();
+    public AuthResponse authResponseMapper(Accounts userAccounts) {
+        AuthResponse responseDTO = new AuthResponse();
         responseDTO.setUserId(userAccounts.getUser().getUserId());
         responseDTO.setFirstname(userAccounts.getUser().getFirstName());
         responseDTO.setMiddlename(userAccounts.getUser().getMiddleName());

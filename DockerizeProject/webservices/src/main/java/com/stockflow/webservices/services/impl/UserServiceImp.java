@@ -5,8 +5,8 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
-import com.stockflow.webservices.dto.UserAccountRequestDTO;
-import com.stockflow.webservices.dto.UserResponseDto;
+import com.stockflow.webservices.dto.UserRequest;
+import com.stockflow.webservices.dto.UserResponse;
 import com.stockflow.webservices.dto.mapper.CustomDTOsMapper;
 import com.stockflow.webservices.models.UserDetails;
 import com.stockflow.webservices.repository.UserRepository;
@@ -25,13 +25,13 @@ public class UserServiceImp implements UserServices {
     }
 
     @Override
-    public UserResponseDto createUsers(UserAccountRequestDTO userAccountDTO) {
+    public UserResponse createUsers(UserRequest userAccountDTO) {
         // Aggregating Data from Multiple Sources UserDetails and Accounts
         // Mapped resonse from responseDTO
         UserDetails user = userMapper.userDetailsMapper(userAccountDTO);
         user = userRepository.save(user);
         userAccountDTO.setUserId(user.getUserId());
-        UserResponseDto responseDTO = userMapper.userDetailsResponseMapper(user);
+        UserResponse responseDTO = userMapper.userDetailsResponseMapper(user);
 
         return responseDTO;
     }
