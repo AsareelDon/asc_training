@@ -1,5 +1,6 @@
 package com.stockflow.webservices.dto.mapper;
 
+import com.stockflow.webservices.dto.AuthResponseDTO;
 import com.stockflow.webservices.dto.UserAccountRequestDTO;
 import com.stockflow.webservices.dto.UserResponseDto;
 import com.stockflow.webservices.models.Accounts;
@@ -45,6 +46,17 @@ public class CustomDTOsMapper {
         responseDTO.setMiddlename(user.getMiddleName());
         responseDTO.setLastname(user.getLastName());
         responseDTO.setUserEmail(user.getAccounts().getUserName());
+
+        return responseDTO;
+    }
+
+    public AuthResponseDTO authResponseMapper(Accounts userAccounts) {
+        AuthResponseDTO responseDTO = new AuthResponseDTO();
+        responseDTO.setUserId(userAccounts.getUser().getUserId());
+        responseDTO.setFirstname(userAccounts.getUser().getFirstName());
+        responseDTO.setMiddlename(userAccounts.getUser().getMiddleName());
+        responseDTO.setLastname(userAccounts.getUser().getLastName());
+        responseDTO.setUserEmail(userAccounts.getUserName());
 
         return responseDTO;
     }

@@ -4,7 +4,7 @@ import org.springframework.stereotype.Service;
 
 import com.stockflow.webservices.dto.AuthResponseDTO;
 import com.stockflow.webservices.dto.LoginCredentialsDTO;
-import com.stockflow.webservices.dto.mapper.AuthResMapper;
+import com.stockflow.webservices.dto.mapper.CustomDTOsMapper;
 import com.stockflow.webservices.models.Accounts;
 import com.stockflow.webservices.repository.AccountRepository;
 import com.stockflow.webservices.services.AuthServices;
@@ -13,11 +13,11 @@ import com.stockflow.webservices.services.PasswordServices;
 @Service
 public class AuthServiceImpl implements AuthServices {
 
-    private final AuthResMapper responseMapper;
+    private final CustomDTOsMapper responseMapper;
     private final AccountRepository accountRepository;
     private final PasswordServices passwordServices;
     
-    public AuthServiceImpl(AuthResMapper responseMapper, AccountRepository accountRepository, PasswordServices passwordServices) {
+    public AuthServiceImpl(CustomDTOsMapper responseMapper, AccountRepository accountRepository, PasswordServices passwordServices) {
         this.responseMapper = responseMapper;
         this.accountRepository = accountRepository;
         this.passwordServices = passwordServices;
