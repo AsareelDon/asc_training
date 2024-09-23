@@ -23,18 +23,18 @@ public class PasswordServicesImp implements PasswordServices {
 
     @Override
     public String passwordEncryption(String userPassword) {
+        String encryptedPassword = "";
         try {
-            return argon2.hash(
+            encryptedPassword = argon2.hash(
                 passwordConfig.getIterations(),
                 passwordConfig.getMemory(),
                 passwordConfig.getParallelism(),
                 userPassword.toCharArray()
             );
         } catch (Exception e) {
-            // Log the exception
             System.err.println("Error during password encryption: " + e.getMessage());
-            throw new RuntimeException("Password encryption failed", e);
         }
+        return encryptedPassword;
     }
 
     @Override
@@ -43,7 +43,6 @@ public class PasswordServicesImp implements PasswordServices {
         try {
             isValid = argon2.verify(hash, userPassword.toCharArray());
         } catch (Exception e) {
-            // Log the exception
             System.err.println("Error during password validation: " + e.getMessage());
         }
         return isValid;
