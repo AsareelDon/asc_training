@@ -2,9 +2,9 @@ package com.stockflow.webservices.dto.mapper;
 
 import com.stockflow.webservices.dto.AuthResponse;
 import com.stockflow.webservices.dto.UserRequest;
-import com.stockflow.webservices.dto.UserResponse;
+import com.stockflow.webservices.dto.UserResponseDto;
 import com.stockflow.webservices.models.Accounts;
-import com.stockflow.webservices.models.UserDetails;
+import com.stockflow.webservices.models.Users;
 import com.stockflow.webservices.services.PasswordServices;
 
 import java.time.LocalDateTime;
@@ -19,8 +19,8 @@ public class CustomDTOsMapper {
         this.passwordServices = passwordServices;
     }
 
-    public UserDetails userDetailsMapper(UserRequest  requestDto) {
-        UserDetails user = new UserDetails();
+    public Users userDetailsMapper(UserRequest  requestDto) {
+        Users user = new Users();
         user.setFirstName(requestDto.getFirstname());
         user.setMiddleName(requestDto.getMiddlename());
         user.setLastName(requestDto.getLastname());
@@ -39,13 +39,13 @@ public class CustomDTOsMapper {
         return user;
     }
 
-    public UserResponse userDetailsResponseMapper(UserDetails user) {
-        UserResponse responseDTO = new UserResponse();
+    public UserResponseDto userDetailsResponseMapper(Users user) {
+        UserResponseDto responseDTO = new UserResponseDto();
         responseDTO.setUserId(user.getUserId());
         responseDTO.setFirstname(user.getFirstName());
         responseDTO.setMiddlename(user.getMiddleName());
         responseDTO.setLastname(user.getLastName());
-        responseDTO.setUserEmail(user.getAccounts().getUserName());
+        responseDTO.setUserEmail(user.getAccounts().getUsername());
 
         return responseDTO;
     }
@@ -56,7 +56,7 @@ public class CustomDTOsMapper {
         responseDTO.setFirstname(userAccounts.getUser().getFirstName());
         responseDTO.setMiddlename(userAccounts.getUser().getMiddleName());
         responseDTO.setLastname(userAccounts.getUser().getLastName());
-        responseDTO.setUserEmail(userAccounts.getUserName());
+        responseDTO.setUserEmail(userAccounts.getUsername());
 
         return responseDTO;
     }

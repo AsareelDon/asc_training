@@ -6,9 +6,9 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import com.stockflow.webservices.dto.UserRequest;
-import com.stockflow.webservices.dto.UserResponse;
+import com.stockflow.webservices.dto.UserResponseDto;
 import com.stockflow.webservices.dto.mapper.CustomDTOsMapper;
-import com.stockflow.webservices.models.UserDetails;
+import com.stockflow.webservices.models.Users;
 import com.stockflow.webservices.repository.UserRepository;
 import com.stockflow.webservices.services.UserServices;
 
@@ -25,19 +25,19 @@ public class UserServiceImp implements UserServices {
     }
 
     @Override
-    public UserResponse createUsers(UserRequest userAccountDTO) {
+    public UserResponseDto createUsers(UserRequest userAccountDTO) {
         // Aggregating Data from Multiple Sources UserDetails and Accounts
         // Mapped resonse from responseDTO
-        UserDetails user = userMapper.userDetailsMapper(userAccountDTO);
+        Users user = userMapper.userDetailsMapper(userAccountDTO);
         user = userRepository.save(user);
         userAccountDTO.setUserId(user.getUserId());
-        UserResponse responseDTO = userMapper.userDetailsResponseMapper(user);
+        UserResponseDto responseDTO = userMapper.userDetailsResponseMapper(user);
 
         return responseDTO;
     }
 
     @Override
-    public List<UserDetails> getListOfUsers() {
+    public List<Users> getListOfUsers() {
         try {
             return userRepository.findAll();
         } catch (Exception e) {
@@ -46,7 +46,7 @@ public class UserServiceImp implements UserServices {
     }
 
     @Override
-    public Optional<UserDetails> findUserById(Long userId) {
+    public Optional<Users> findUserById(Long userId) {
         try {
             return userRepository.findById(userId);
         } catch (Exception e) {
@@ -55,7 +55,7 @@ public class UserServiceImp implements UserServices {
     }
 
     @Override
-    public UserDetails updateUserDetails(UserDetails updatedUsers, Long userId) {
+    public Users updateUserDetails(Users updatedUsers, Long userId) {
         try {
             updatedUsers.setUserId(userId);
             return userRepository.save(updatedUsers);

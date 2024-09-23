@@ -4,17 +4,17 @@ import java.util.List;
 import java.util.Optional;
 
 import com.stockflow.webservices.dto.UserRequest;
-import com.stockflow.webservices.dto.UserResponse;
-import com.stockflow.webservices.models.UserDetails;
+import com.stockflow.webservices.dto.UserResponseDto;
+import com.stockflow.webservices.models.Users;
 
 public interface UserServices {
-    UserResponse createUsers(UserRequest newUsers);
+    UserResponseDto createUsers(UserRequest newUsers);
 
-    List<UserDetails> getListOfUsers();
+    List<Users> getListOfUsers();
 
-    Optional<UserDetails> findUserById(Long userId);
+    Optional<Users> findUserById(Long userId);
 
-    UserDetails updateUserDetails(UserDetails updatedUsers, Long userId);
+    Users updateUserDetails(Users updatedUsers, Long userId);
     
     void deactivateUser(Long userId);
 }

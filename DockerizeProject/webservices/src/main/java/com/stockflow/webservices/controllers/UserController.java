@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.stockflow.webservices.dto.UserRequest;
-import com.stockflow.webservices.dto.UserResponse;
-import com.stockflow.webservices.models.UserDetails;
+import com.stockflow.webservices.dto.UserResponseDto;
+import com.stockflow.webservices.models.Users;
 import com.stockflow.webservices.services.UserServices;
 
 import jakarta.validation.Valid;
@@ -49,7 +49,7 @@ public class UserController {
     
                 return ResponseEntity.badRequest().body(errors);
             }
-            UserResponse createdUsers = userServices.createUsers(users);
+            UserResponseDto createdUsers = userServices.createUsers(users);
             return ResponseEntity.status(HttpStatus.CREATED).body(createdUsers);
 
         } catch (Exception error) {
@@ -58,17 +58,17 @@ public class UserController {
     }
 
     @GetMapping("getAllUsers")
-    public List<UserDetails> getAllUsers() {
+    public List<Users> getAllUsers() {
         return userServices.getListOfUsers();
     }
     
     @GetMapping("getUser/{userId}")
-    public Optional<UserDetails> getUserById(@PathVariable("userId") Long userId) {
+    public Optional<Users> getUserById(@PathVariable("userId") Long userId) {
         return userServices.findUserById(userId);
     }
 
     @PutMapping("updateUser/{userId}")
-    public UserDetails updateUser(@PathVariable Long userId, @RequestBody UserDetails updatedUser) {
+    public Users updateUser(@PathVariable Long userId, @RequestBody Users updatedUser) {
         return userServices.updateUserDetails(updatedUser, userId);
     }
 
