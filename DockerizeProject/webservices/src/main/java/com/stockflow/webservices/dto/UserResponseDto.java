@@ -3,7 +3,7 @@ package com.stockflow.webservices.dto;
 import lombok.Data;
 
 @Data
-public class UserAccountResponseDTO {
+public class UserResponseDto {
     private Long userId;
     private String firstname;
     private String middlename;

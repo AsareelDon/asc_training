@@ -4,11 +4,11 @@ import java.util.List;
 import java.util.Optional;
 
 import com.stockflow.webservices.dto.UserAccountRequestDTO;
-import com.stockflow.webservices.dto.UserAccountResponseDTO;
+import com.stockflow.webservices.dto.UserResponseDto;
 import com.stockflow.webservices.models.UserDetails;
 
 public interface UserServices {
-    UserAccountResponseDTO createUsers(UserAccountRequestDTO newUsers);
+    UserResponseDto createUsers(UserAccountRequestDTO newUsers);
 
     List<UserDetails> getListOfUsers();
 

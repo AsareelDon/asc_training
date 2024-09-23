@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.stockflow.webservices.dto.AuthResponseDTO;
 import com.stockflow.webservices.dto.LoginCredentialsDTO;
 import com.stockflow.webservices.dto.UserAccountRequestDTO;
-import com.stockflow.webservices.dto.UserAccountResponseDTO;
+import com.stockflow.webservices.dto.UserResponseDto;
 import com.stockflow.webservices.services.AuthServices;
 import com.stockflow.webservices.services.UserServices;
 
@@ -43,7 +43,7 @@ public class AuthController {
 
                 return ResponseEntity.badRequest().body(errorMessage);
             }
-            UserAccountResponseDTO registeredAccount = userServices.createUsers(user);
+            UserResponseDto registeredAccount = userServices.createUsers(user);
             return ResponseEntity.status(HttpStatus.CREATED).body(registeredAccount);
 
         } catch (Exception error) {
