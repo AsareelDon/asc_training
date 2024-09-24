@@ -4,6 +4,7 @@ import com.stockflow.webservices.dto.AuthResponse;
 import com.stockflow.webservices.dto.UserRequest;
 import com.stockflow.webservices.dto.UserResponseDto;
 import com.stockflow.webservices.models.Accounts;
+import com.stockflow.webservices.models.Roles;
 import com.stockflow.webservices.models.Users;
 import com.stockflow.webservices.services.PasswordServices;
 
@@ -19,7 +20,7 @@ public class CustomDTOsMapper {
         this.passwordServices = passwordServices;
     }
 
-    public Users userDetailsMapper(UserRequest  requestDto) {
+    public Users userDetailsMapper(UserRequest requestDto) {
         Users user = new Users();
         user.setFirstName(requestDto.getFirstname());
         user.setMiddleName(requestDto.getMiddlename());
@@ -33,6 +34,7 @@ public class CustomDTOsMapper {
         userAccount.setUserPassword(passwordServices.passwordEncryption(requestDto.getUserPassword()));
         userAccount.setCreatedAt(LocalDateTime.now());
         userAccount.setUpdatedAt(LocalDateTime.now());
+        userAccount.setAccountRole(Roles.USER);
 
         user.setAccounts(userAccount);
 
@@ -57,7 +59,8 @@ public class CustomDTOsMapper {
         responseDTO.setMiddlename(userAccounts.getUser().getMiddleName());
         responseDTO.setLastname(userAccounts.getUser().getLastName());
         responseDTO.setUserEmail(userAccounts.getUsername());
-
+        responseDTO.setAccountRoles(userAccounts.getAccountRole());
+        
         return responseDTO;
     }
 }
