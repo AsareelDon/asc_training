@@ -32,10 +32,10 @@ A lightweight and efficient backend service built with Spring Boot, offering sea
         - [x] Dockerfile
         - [x] docker-compose
     - [ ] Spring Security
-        - [ ] Encrypton and Decryption
-        - [ ] Authentication & Authorization 
+        - [x] Encrypton and Decryption
+        - [x] Authentication & Authorization 
             - [ ] JWT
-                - [ ] Access Token
+                - [x] Access Token
                 - [ ] Refresh Token
 
 
