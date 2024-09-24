@@ -3,11 +3,13 @@ package com.stockflow.webservices.controllers;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.stockflow.webservices.dto.AuthResponse;
+import com.stockflow.webservices.dto.JwtContentDto;
 import com.stockflow.webservices.dto.LoginCredentials;
 import com.stockflow.webservices.dto.UserRequest;
 import com.stockflow.webservices.dto.UserResponseDto;
 import com.stockflow.webservices.services.AuthServices;
 import com.stockflow.webservices.services.UserServices;
+import com.stockflow.webservices.utility.JwtUtil;
 
 import jakarta.validation.Valid;
 
@@ -26,10 +28,12 @@ public class AuthController {
 
     private final UserServices userServices;
     private final AuthServices authServices;
+    private final JwtUtil jwtUtil;
 
-    public AuthController(UserServices userServices, AuthServices authServices) {
+    public AuthController(UserServices userServices, AuthServices authServices, JwtUtil jwtUtil) {
         this.userServices = userServices;
         this.authServices = authServices;
+        this.jwtUtil = jwtUtil;
     }
 
     @PostMapping("/signup")
@@ -63,7 +67,17 @@ public class AuthController {
                 return ResponseEntity.badRequest().body(errorMessage);
             }
             AuthResponse user = authServices.authenticateUserCredentials(credentials);
-            return ResponseEntity.status(HttpStatus.CREATED).body(user);
+            String token = jwtUtil.generateToken(new JwtContentDto(
+                user.getUserId(),
+                user.getUserEmail(),
+                user.getAccountRoles()
+            ));
+
+            Map<String, Object> response = new HashMap<>();
+            response.put("user", user);
+            response.put("token", token);
+
+            return ResponseEntity.status(HttpStatus.CREATED).body(response);
 
         } catch (Exception error) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(error.getMessage());
