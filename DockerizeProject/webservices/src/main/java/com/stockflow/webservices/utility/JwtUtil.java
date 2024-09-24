@@ -62,12 +62,11 @@ public class JwtUtil {
         byte[] keyBytes = Decoders.BASE64.decode(secretKey);
         SecretKey key = Keys.hmacShaKeyFor(keyBytes);
 
-        ObjectMapper objectMapper = new ObjectMapper();
-        String subject = objectMapper.writeValueAsString(jwtContentDto);
-
         return Jwts
             .builder()
-            .subject(subject)
+            .claim("userId", jwtContentDto.getUserId())
+            .claim("userEmail", jwtContentDto.getUserEmail())
+            .claim("accountRole", jwtContentDto.getAccountRole().name())
             .issuedAt(new Date(System.currentTimeMillis()))
             .expiration(new Date(System.currentTimeMillis() + expirationTime))
             .signWith(key)
