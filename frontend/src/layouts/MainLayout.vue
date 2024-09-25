@@ -47,32 +47,30 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import EssentialLink, { EssentialLinkProps } from 'components/EssentialLink.vue';
-import { data } from 'autoprefixer';
 
 const essentialLinks: EssentialLinkProps[] = [
   {
     title: 'Dashboard',
-    caption: 'quasar.dev',
-    icon: 'school',
-    link: 'https://quasar.dev'
+    icon: 'bi-house-fill',
+    iconSize: '29px'
   },
   {
     title: 'Leave Requests',
-    caption: 'github.com/quasarframework',
-    icon: 'code',
-    link: 'https://github.com/quasarframework'
+    caption: 'view remaining or apply request',
+    icon: 'bi-folder-fill',
+    iconSize: '26px'
   },
   {
     title: 'Employees',
-    caption: 'chat.quasar.dev',
-    icon: 'chat',
-    link: 'https://chat.quasar.dev'
+    caption: 'employees table',
+    icon: 'bi-people-fill',
+    iconSize: '28px'
   },
   {
     title: 'Forum',
-    caption: 'forum.quasar.dev',
-    icon: 'record_voice_over',
-    link: 'https://forum.quasar.dev'
+    caption: 'discus with teams',
+    icon: 'bi-chat-left-dots-fill',
+    iconSize: '24px'
   }
 ];
 
